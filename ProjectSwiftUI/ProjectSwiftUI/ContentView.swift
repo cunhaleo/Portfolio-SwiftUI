@@ -16,13 +16,18 @@ struct ContentView: View {
                 ForEach(menu) { section in
                     Section(section.name) {
                         ForEach(section.items) { item in
-                            ItemRow(item: item)
+                            NavigationLink(value: item) {
+                                ItemRow(item: item)
+                            }
                         }
                     }
                 }
             }
             .navigationTitle("Menu")
             .listStyle(GroupedListStyle())
+            .navigationDestination(for: MenuItem.self) { item in
+                Details(item: item)
+            }
         }
     }
 }
